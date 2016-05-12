@@ -10,7 +10,6 @@ from collections import deque
 AREA = 1000
 QUEUE_SIZE = 10
 
-
 def doCameraStuff():
     camera = cv2.VideoCapture(0)
     time.sleep(0.25)
@@ -18,9 +17,8 @@ def doCameraStuff():
     myqueue = deque(list(), QUEUE_SIZE)
 
     lastFrame = None
-    while True:
-        (grabbed, frame) = camera.read()
-        text = "Unoccupied"
+    while camera.isOpened():
+        grabbed, frame = camera.read()
 
         if not grabbed:
             break
@@ -41,6 +39,7 @@ def doCameraStuff():
         s = np.zeros(lastFrame.shape, dtype=np.uint8)
 
         for idx, delta in enumerate(myqueue):
+            f = cv2.multiply(delta, 1 / (len(myqueue) - idx))
             s = cv2.add(s, delta)
 
         cv2.imshow("Frame Delta", s)
