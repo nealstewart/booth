@@ -1,17 +1,23 @@
-# import the necessary packages
-from collections import deque
+"""
+Renders motion detected in webcam to terminal as ASCII
+"""
+
 import math
 import time
+from collections import deque
 
 import imutils
 import numpy as np
-
 import cv2
 
 AREA = 1000
 QUEUE_SIZE = 10
 
 def main():
+    """
+    Renders your webcam to ascii
+    """
+
     camera = cv2.VideoCapture(0)
     time.sleep(0.25)
 
@@ -42,8 +48,8 @@ def main():
             adjusted_delta = cv2.multiply(delta, 1 / (len(myqueue) - idx))
             movement_only = cv2.add(movement_only, adjusted_delta)
 
-        lowres = imutils.resize(movement_only, width=250)
-        
+        lowres = imutils.resize(movement_only, width=50)
+
         print(get_ascii_of_image(lowres))
 
         key = cv2.waitKey(1) & 0xFF
@@ -53,8 +59,6 @@ def main():
 
     camera.release()
     cv2.destroyAllWindows()
-
-
 
 """
 8-bit ascii lookup table
@@ -70,6 +74,7 @@ ASCII_LOOKUP = {
     7: "M"
 }
 
+
 def get_ascii_of_image(image):
     """
     Outputs the string representation of an image
@@ -78,11 +83,13 @@ def get_ascii_of_image(image):
     ascii_output = ""
     for y_coord in range(0, len(image)):
         for x_coord in range(0, len(image[y_coord])):
-            ascii_output = ascii_output + get_ascii_char(image[y_coord][x_coord])
+            ascii_output = ascii_output + \
+                get_ascii_char(image[y_coord][x_coord])
 
         ascii_output = ascii_output + "\n"
 
     return ascii_output
+
 
 def get_ascii_char(num):
     """
