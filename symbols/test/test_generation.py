@@ -1,3 +1,5 @@
+"Tests for generation module"
+
 from booth.symbols import generation
 
 
@@ -22,10 +24,9 @@ def test_bounding_rect_for_multiple():
 def test_bounding_rect_for_size():
     rects = [
         generation.SimpleRect((10, 10), (5, 5)),
-        generation.SimpleRect((20, 20), (20, 20))
+        generation.SimpleRect((20, 20), (30, 40))
     ]
 
     bounding_rect = generation.get_bounding_rect(rects)
     assert bounding_rect.location == (10, 10)
-    assert bounding_rect.size == (30, 30)
-
+    assert bounding_rect.size == (40, 50)
