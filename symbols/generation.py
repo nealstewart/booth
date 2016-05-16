@@ -9,7 +9,6 @@ Ok, so the plan here is to:
 5. play with the symbol data type to try and render other versions
 
 """
-
 import cairocffi as cairo
 import numpy
 
@@ -85,4 +84,5 @@ def main():
     surface.write_to_png("example.png")
 
 
-main()
+if __name__ == "__main__":
+    main()
