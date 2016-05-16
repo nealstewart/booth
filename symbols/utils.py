@@ -1,17 +1,27 @@
 from booth.symbols import shapes
 
+def get_center(shape):
+    x_coord = shape.location[0] + (shape.size[0] / 2)
+    y_coord = shape.location[1] + (shape.size[1] / 2)
+    return (x_coord, y_coord)
+
 def get_bounding_rect(children):
-    cmp_x = lambda rect: rect.location[0]
-    cmp_y = lambda rect: rect.location[1] + rect.size[1]
+    cmp_left = lambda rect: rect.location[0]
+    cmp_right = lambda rect: rect.location[0] + rect.size[0]
+    cmp_bottom = lambda rect: rect.location[1]
+    cmp_top = lambda rect: rect.location[1] + rect.size[1]
 
-    x_sorted_children = sorted(children, key=cmp_x)
-    y_sorted_children = sorted(children, key=cmp_y)
+    x_min = min(children, key=cmp_left)
+    x_max = max(children, key=cmp_right)
 
-    location = (x_sorted_children[0].location[0],
-                y_sorted_children[0].location[1])
+    y_min = min(children, key=cmp_bottom)
+    y_max = max(children, key=cmp_top)
 
-    size = (x_sorted_children[-1].location[0] - location[0] + x_sorted_children[-1].size[0],
-            y_sorted_children[-1].location[1] - location[1] + y_sorted_children[-1].size[1])
+    location = (x_min.location[0],
+                y_min.location[1])
+
+    size = (x_max.location[0] - location[0] + x_max.size[0],
+            y_max.location[1] - location[1] + y_max.size[1])
 
     return shapes.SimpleRect(location, size)
 

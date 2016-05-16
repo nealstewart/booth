@@ -21,3 +21,8 @@ class Symbol():
         self.containers = [
             utils.add_padding(utils.get_bounding_rect(contained), 10)
         ]
+
+        self.lines = [
+            (self.shapes[0], self.shapes[1]),
+            (self.shapes[2], self.shapes[3])
+        ]
