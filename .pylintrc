@@ -1,3 +1,6 @@
+[MASTER]
+init-hook='import sys; sys.path.append("/Users/nes/repos/python")'
+
 [TYPECHECK]
 
 ignored-modules = cv2, numpy
