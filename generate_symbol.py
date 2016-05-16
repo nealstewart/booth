@@ -12,9 +12,8 @@ Ok, so the plan here is to:
 
 import cairocffi as cairo
 
-from booth.symbols import shapes
+from booth.symbols import creation
 from booth.symbols import drawing
-from booth.symbols import utils as symbol_utils
 
 SURFACE_WIDTH, SURFACE_HEIGHT = 256, 256
 
@@ -30,28 +29,8 @@ def main():
     ctx.rectangle(0, 0, SURFACE_WIDTH, SURFACE_HEIGHT)
     ctx.fill()
 
-    size = (20, 20)
-    ctx.set_source_rgb(0, 0, 0)
-
-    first_rect = shapes.SimpleRect((10, 10), size)
-    second_rect = shapes.SimpleRect((60, 10), size)
-    third_rect = shapes.SimpleRect((10, 60), size)
-    fourth_rect = shapes.SimpleRect((60, 60), size)
-
-    drawing.draw_rect(ctx, first_rect)
-    drawing.draw_rect(ctx, second_rect)
-    drawing.draw_rect(ctx, third_rect)
-    drawing.draw_rect(ctx, fourth_rect)
-
-    ctx.fill()
-
-    rects = [second_rect, fourth_rect]
-
-    padded = symbol_utils.add_padding(
-        symbol_utils.get_bounding_rect(rects), 10)
-
-    drawing.draw_rect(ctx, padded)
-    ctx.stroke()
+    symbol = creation.Symbol()
+    drawing.draw_symbol(ctx, symbol)
 
     surface.write_to_png("example.png")
 
