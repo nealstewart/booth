@@ -12,11 +12,10 @@ Ok, so the plan here is to:
 
 import cairocffi as cairo
 
-from booth.symbols import creation
-from booth.symbols import drawing
+from symbols import creation
+from symbols import drawing
 
 SURFACE_WIDTH, SURFACE_HEIGHT = 256, 256
-
 
 def main():
     """And I am here"""

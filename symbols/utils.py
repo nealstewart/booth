@@ -1,4 +1,4 @@
-from booth.symbols import shapes
+from symbols import shapes
 
 def get_center(shape):
     x_coord = shape.location[0] + (shape.size[0] / 2)

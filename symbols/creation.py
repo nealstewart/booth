@@ -1,5 +1,5 @@
-from booth.symbols import shapes
-from booth.symbols import utils
+from symbols import shapes
+from symbols import utils
 
 
 class Symbol():
