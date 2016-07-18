@@ -1,19 +1,32 @@
 from symbols import shapes
 from symbols import utils
+from random import randint
 
+# Symbols have:
+# - shapes
+# - lines
+# - containers
+
+# Lines have
+# - start : Shape
+# - end : Shape
 
 class Symbol():
 
-    def __init__(self):
-        print("hello")
-
+    def create_rect(self):
         size = (20, 20)
+        x = (randint(0, self.bounds[0] - size[0] - 10))
+        y = (randint(0, self.bounds[1] - size[1] - 10))
+        return shapes.SimpleRect((x, y), size)
+
+    def __init__(self, bounds):
+        self.bounds = bounds
 
         self.shapes = [
-            shapes.SimpleRect((10, 10), size),
-            shapes.SimpleRect((60, 10), size),
-            shapes.SimpleRect((10, 60), size),
-            shapes.SimpleRect((60, 60), size)
+            self.create_rect(),
+            self.create_rect(),
+            self.create_rect(),
+            self.create_rect()
         ]
 
         contained = [self.shapes[1], self.shapes[3]]
@@ -23,6 +36,6 @@ class Symbol():
         ]
 
         self.lines = [
-            (self.shapes[0], self.shapes[1]),
+            (self.shapes[0], self.shapes[2]),
             (self.shapes[2], self.shapes[3])
         ]

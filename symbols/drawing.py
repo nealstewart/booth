@@ -10,8 +10,6 @@ def draw_rect(ctx, rect):
         rect.size[0], rect.size[1])
 
 def draw_line(ctx, line):
-    print('drawing line')
-
     first_point = utils.get_center(line[0])
     second_point = utils.get_center(line[1])
 

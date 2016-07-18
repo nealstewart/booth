@@ -11,6 +11,7 @@ Ok, so the plan here is to:
 """
 
 import cairocffi as cairo
+from itertools import repeat
 
 from symbols import creation
 from symbols import drawing
@@ -20,18 +21,19 @@ SURFACE_WIDTH, SURFACE_HEIGHT = 256, 256
 def main():
     """And I am here"""
 
-    surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, SURFACE_WIDTH,
-                                 SURFACE_HEIGHT)
-    ctx = cairo.Context(surface)
+    for i in iter(range(10)):
+        surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, SURFACE_WIDTH,
+                                     SURFACE_HEIGHT)
+        ctx = cairo.Context(surface)
 
-    ctx.set_source_rgb(1, 1, 1)
-    ctx.rectangle(0, 0, SURFACE_WIDTH, SURFACE_HEIGHT)
-    ctx.fill()
+        ctx.set_source_rgb(1, 1, 1)
+        ctx.rectangle(0, 0, SURFACE_WIDTH, SURFACE_HEIGHT)
+        ctx.fill()
+        symbol = creation.Symbol((SURFACE_WIDTH, SURFACE_HEIGHT))
+        drawing.draw_symbol(ctx, symbol)
+        surface.write_to_png("output/example " + str(i) + ".png")
 
-    symbol = creation.Symbol()
-    drawing.draw_symbol(ctx, symbol)
-
-    surface.write_to_png("example.png")
+    print("Created symbols!")
 
 
 if __name__ == "__main__":
