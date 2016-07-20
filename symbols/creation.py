@@ -13,10 +13,12 @@ from random import randint
 
 class Symbol():
 
+    OUTSIDE_MARGIN=20
+
     def create_rect(self):
         size = (20, 20)
-        x = (randint(0, self.bounds[0] - size[0] - 10))
-        y = (randint(0, self.bounds[1] - size[1] - 10))
+        x = (randint(self.OUTSIDE_MARGIN, self.bounds[0] - size[0] - self.OUTSIDE_MARGIN))
+        y = (randint(self.OUTSIDE_MARGIN, self.bounds[1] - size[1] - self.OUTSIDE_MARGIN))
         return shapes.SimpleRect((x, y), size)
 
     def __init__(self, bounds):

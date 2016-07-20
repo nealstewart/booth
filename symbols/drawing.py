@@ -4,11 +4,6 @@ from symbols import shapes
 from symbols import utils
 
 
-def draw_rect(ctx, rect):
-    ctx.rectangle(
-        rect.location[0], rect.location[1],
-        rect.size[0], rect.size[1])
-
 def draw_line(ctx, line):
     first_point = utils.get_center(line[0])
     second_point = utils.get_center(line[1])
@@ -22,12 +17,12 @@ def draw_symbol(ctx, symbol):
     ctx.set_source_rgb(0, 0, 0)
 
     for shape in symbol.shapes:
-        draw_rect(ctx, shape)
+        shape.draw(ctx)
 
     ctx.fill()
 
     for container in symbol.containers:
-        draw_rect(ctx, container)
+        container.draw(ctx)
 
     ctx.stroke()
 
